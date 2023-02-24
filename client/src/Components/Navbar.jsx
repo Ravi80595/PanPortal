@@ -14,9 +14,11 @@ return (
         <Link to="/applynewcard">
         <Text>New Card Form</Text>
         </Link>
+        <Link to="/correction">
         <Text>Correction Form</Text>
+        </Link>
         <Link to="/cardstatus">
-        <Text>Track Status</Text>
+        <Text>My Card</Text>
         </Link>
         <Text>Logout</Text>
       </Flex>
