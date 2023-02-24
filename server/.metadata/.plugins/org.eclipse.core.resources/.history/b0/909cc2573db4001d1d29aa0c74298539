@@ -1,0 +1,50 @@
+package com.freelancer.Controller;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.freelancer.Model.Document;
+import com.freelancer.Service.DocumentServiceImpl;
+
+import jakarta.validation.constraints.AssertFalse.List;
+
+@RestController
+public class AdminController {
+
+	@Autowired
+	private DocumentServiceImpl docImpl;
+
+	@PutMapping("/admin/ApproveDocuments")
+	public ResponseEntity<?> approveDocument(@RequestParam("docId") Integer docInt) {
+		Document doc = docImpl.approveDocument(docInt);
+		if (doc != null)
+			return ResponseEntity.ok().contentType(MediaType.parseMediaType(doc.getDocumentType()))
+					.header(HttpHeaders.CONTENT_DISPOSITION, "Document")
+					.body(new ByteArrayResource(doc.getDocumentUpload()));
+		else
+			return new ResponseEntity<>("file Not updated", HttpStatus.BAD_REQUEST);
+	}
+
+	@GetMapping("/admin/getDocuments")
+	public ResponseEntity<?> getDocument(@RequestParam("docId") Integer docInt) {
+		Document doc = docImpl.getDocument(docInt);
+		if (doc != null)
+			
+			
+			return ResponseEntity.ok().contentType(MediaType.parseMediaType(doc.getDocumentType()))
+					.header(HttpHeaders.CONTENT_DISPOSITION, "Document")
+					.body(new ByteArrayResource(doc.getDocumentUpload()));
+		else
+			return new ResponseEntity<>("file Not updated", HttpStatus.BAD_REQUEST);
+	}
+}

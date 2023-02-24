@@ -1,0 +1,10 @@
+package com.freelancer.Repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.freelancer.Model.Document;
+
+public interface DocumentRepo extends JpaRepository<Document, Integer> {
+
+	public java.util.List<Document> findByProfileObject(String userEmail);
+}

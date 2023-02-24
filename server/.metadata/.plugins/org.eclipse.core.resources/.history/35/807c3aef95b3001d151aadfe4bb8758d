@@ -1,0 +1,9 @@
+package com.freelancer.Service;
+
+import com.freelancer.Model.Profile;
+
+public interface ProfileService {
+ public String addProfile(String userName);
+
+public String addProfile(Profile profile);
+}

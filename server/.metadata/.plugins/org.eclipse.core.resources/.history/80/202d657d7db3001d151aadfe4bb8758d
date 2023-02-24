@@ -1,0 +1,11 @@
+package com.freelancer.Service;
+
+import com.freelancer.Model.Admin;
+import com.freelancer.Model.LoginModel;
+import com.freelancer.Model.User;
+
+public interface UserService {
+	public Boolean isUserPresent(LoginModel loginModel);
+
+	public Admin saveUser(User user);
+}

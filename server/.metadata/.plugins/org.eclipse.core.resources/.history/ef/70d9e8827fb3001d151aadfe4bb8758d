@@ -1,0 +1,40 @@
+package com.freelancer.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.freelancer.Model.Admin;
+import com.freelancer.Model.LoginModel;
+import com.freelancer.Model.User;
+import com.freelancer.Service.AdminServiceImpl;
+import com.freelancer.Service.UserServiceImpl;
+
+@RestController
+public class AuthController {
+	@Autowired
+	private AdminServiceImpl adminServiceImpl;
+	@Autowired
+	private UserServiceImpl userServiceImpl;
+
+	public ResponseEntity<?> isUserPresent(LoginModel data) {
+
+		return new ResponseEntity<>(userServiceImpl.isUserPresent(data), HttpStatus.ACCEPTED);
+	}
+
+	public ResponseEntity<?> isAdminPresent(LoginModel data) {
+
+		return new ResponseEntity<>(adminServiceImpl.isAdminPresent(data), HttpStatus.ACCEPTED);
+	}
+
+	public ResponseEntity<?> saveAdmin(Admin data) {
+
+		return new ResponseEntity<>(adminServiceImpl.saveAdmin(data), HttpStatus.ACCEPTED);
+	}
+
+	public ResponseEntity<?> saveUser(User data) {
+
+		return new ResponseEntity<>(userServiceImpl.saveUser(data), HttpStatus.ACCEPTED);
+	}
+}

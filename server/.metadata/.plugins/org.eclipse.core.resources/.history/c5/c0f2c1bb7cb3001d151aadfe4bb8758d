@@ -1,0 +1,12 @@
+package com.freelancer.Repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.freelancer.Model.Admin;
+
+import jakarta.validation.constraints.Email;
+
+public interface AdminRepo extends JpaRepository<Admin,Email> {
+          
+	public Admin findByMobileNumber(String num) ;
+}

@@ -1,0 +1,32 @@
+package com.freelancer.Service;
+
+import org.springframework.stereotype.Service;
+
+import com.freelancer.Model.CurrentUserSession;
+import com.freelancer.Model.LoginModel;
+
+@Service
+public class LoginServiceImpl implements LoginService {
+
+	@Override
+	public CurrentUserSession getSessionByUuid(String uuid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CurrentUserSession loginUser(LoginModel dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String signOutUser(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+
+}

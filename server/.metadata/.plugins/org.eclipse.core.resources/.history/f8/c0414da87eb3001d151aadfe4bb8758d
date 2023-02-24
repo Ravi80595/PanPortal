@@ -1,0 +1,15 @@
+package com.freelancer.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.freelancer.Service.AdminServiceImpl;
+import com.freelancer.Service.UserServiceImpl;
+
+@RestController
+public class AuthController {
+	@Autowired
+	private AdminServiceImpl adminServiceImpl;
+	@Autowired
+	private UserServiceImpl userServiceImpl;
+}

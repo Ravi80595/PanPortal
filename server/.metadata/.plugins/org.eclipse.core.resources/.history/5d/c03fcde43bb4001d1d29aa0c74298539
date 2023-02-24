@@ -1,0 +1,17 @@
+package com.freelancer;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.freelancer.Service.DocumentServiceImpl;
+
+@SpringBootApplication
+public class PanCardProject1Application {
+
+	public static void main(String[] args) {
+	SpringApplication.run(PanCardProject1Application.class, args);
+	  DocumentServiceImpl a = new DocumentServiceImpl() ;
+	  a.getDocumentByEmail("kunal@gmail.com");
+	}
+
+}

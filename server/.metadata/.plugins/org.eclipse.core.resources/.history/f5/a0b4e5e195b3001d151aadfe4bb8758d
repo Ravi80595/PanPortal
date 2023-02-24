@@ -1,0 +1,28 @@
+package com.freelancer.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.freelancer.Model.Profile;
+import com.freelancer.Model.User;
+import com.freelancer.Repo.ProfileRepo;
+import com.freelancer.Repo.UserRepo;
+
+@Service
+public class ProfileServiceImpl implements ProfileService {
+
+	
+	@Autowired
+	private ProfileRepo profileRepo;
+
+	@Override
+	public String addProfile(Profile profile) {
+		// TODO Auto-generated method stub
+		profile
+	 profileRepo.save(profile);
+
+
+		return null;
+	}
+
+}

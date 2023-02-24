@@ -1,0 +1,26 @@
+package com.freelancer.Service;
+
+import com.freelancer.Model.Document;
+import com.freelancer.Model.Profile;
+
+public class DocumentServiceImpl  implements DocumentService{
+
+	@Override
+	public Document addDocuments(Document data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Document editDocument(Integer documentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Document deleteDocument(Integer documentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+   
+}

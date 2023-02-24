@@ -1,0 +1,32 @@
+package com.freelancer.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.freelancer.Model.Admin;
+import com.freelancer.Model.LoginModel;
+import com.freelancer.Repo.AdminRepo;
+
+import lombok.Data;
+
+@Service
+@Data
+
+public class AdminServiceImpl implements AdminService {
+
+	@Autowired
+	private AdminRepo adminRepo;
+
+	@Override
+	public Boolean isAdminPresent(LoginModel loginModel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean saveAdmin(Admin admin) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

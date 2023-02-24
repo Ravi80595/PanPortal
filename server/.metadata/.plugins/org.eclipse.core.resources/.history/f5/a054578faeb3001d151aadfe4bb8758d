@@ -1,0 +1,11 @@
+package com.freelancer.Service;
+
+import com.freelancer.Model.Document;
+
+public interface DocumentService {
+	  
+		public Document addDocuments(Document data);
+		
+		public Document editDocument(Integer documentId);
+		public Document deleteDocument(Integer documentId);
+}

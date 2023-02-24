@@ -1,0 +1,82 @@
+package com.freelancer.Service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.freelancer.Model.Profile;
+import com.freelancer.Model.User;
+import com.freelancer.Repo.ProfileRepo;
+import com.freelancer.Repo.UserRepo;
+
+@Service
+public class ProfileServiceImpl implements ProfileService {
+
+	@Autowired
+	private UserRepo userRepo;
+	@Autowired
+	private ProfileRepo profileRepo;
+
+	@Override
+	public Profile addProfile(Profile profile) {
+		// TODO Auto-generated method stub
+		Optional<User> authUser = userRepo.findById(profile.getEmail());
+
+		if (authUser.isPresent()) {
+			profile.setUserObject(authUser.get());
+			profile.setMobile(authUser.get().getMobileNumber());
+//			authUser.get().setProfile(profile);
+//			userRepo.save(authUser.get());
+			return profileRepo.save(profile);
+		}
+		return null;
+	}
+
+	@Override
+	public Profile getProfile(String userEmail) {
+		// TODO Auto-generated method stub
+		Optional<Profile> profileObj = profileRepo.findByEmail(userEmail);
+
+		if (profileObj.isPresent()) {
+			return profileObj.get();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public Profile editProfile(Integer userId, Profile profile) {
+		// TODO Auto-generated method stub
+		Optional<Profile> authProfile = profileRepo.findById(userId);
+
+		if (authProfile.isPresent()) {
+			authProfile.get().setFirstName(profile.getFirstName());
+			authProfile.get().setMiddleName(profile.getMiddleName());
+			authProfile.get().setLastName(profile.getLastName());
+			authProfile.get().setAddress(profile.getAddress());
+			authProfile.get().setMobile(profile.getMobile());
+			authProfile.get().getUserObject().setMobileNumber(profile.getMobile());
+			Optional<User> authUser = userRepo.findById(profile.getEmail());
+			authUser.get().setMobileNumber(profile.getMobile());
+			userRepo.save(authUser.get());
+			return profileRepo.save(authProfile.get());
+		}
+
+		return null;
+	}
+
+	@Override
+	public Profile deleteProfile(String userEmail) {
+		// TODO Auto-generated method stub
+		Optional<Profile> authProfile = profileRepo.findByEmail(userEmail);
+
+		if (authProfile.isPresent()) {
+
+			profileRepo.delete(authProfile.get());
+			return authProfile.get();
+		}
+		return null;
+	}
+
+}

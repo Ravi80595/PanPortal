@@ -1,0 +1,18 @@
+package com.freelancer.Service;
+
+import com.freelancer.Model.CurrentUserSession;
+import com.freelancer.Model.LoginModel;
+
+public interface LoginService {
+//	public User addUser(User user) throws UserException;
+
+//	public boolean adminOrNot(String uuid) throws UserException;
+
+	public CurrentUserSession getSessionByUuid(String uuid);
+
+	public CurrentUserSession loginUser(LoginModel dto);
+
+//	public User removeUser(User user) throws UserException;
+
+	public String signOutUser(String key) ;
+}

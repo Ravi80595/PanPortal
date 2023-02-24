@@ -1,0 +1,13 @@
+package com.freelancer.Model;
+
+public class Profile {
+	private Integer profileId;
+	private User userObject;
+	private String firstName;
+	private String middleName;
+
+	private String lastName;
+	private String address;
+	private String email;
+	private String mobile;
+}

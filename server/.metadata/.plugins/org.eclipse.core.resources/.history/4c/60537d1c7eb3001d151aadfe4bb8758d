@@ -1,0 +1,23 @@
+package com.freelancer.Controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class LogInLogOutController {
+
+	
+	@PostMapping("/login")
+	public ResponseEntity<CurrentUserSession> logInHandler(@Valid @RequestBody LoginModel dto) throws UserException {
+		CurrentUserSession result = logService.loginUser(dto);
+
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+
+	@GetMapping("/logout")
+	public ResponseEntity<String> logoutuserHandler(@RequestParam String uuid) throws UserException {
+
+		String log = logService.signOutUser(uuid);
+
+		return new ResponseEntity<>(log, HttpStatus.OK);
+	}
+}

@@ -1,0 +1,19 @@
+package com.freelancer.Model;
+
+import java.util.ArrayList;
+
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Document {
+	private Integer documentId;
+	private User documentType;
+	private String firstName;
+	private ArrayList<Byte> doucementUpload;
+}
