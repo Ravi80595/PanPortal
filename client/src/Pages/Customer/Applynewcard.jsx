@@ -11,7 +11,7 @@ const [image,setImage]=useState('')
 return (
     <Box bg='grey'>
       <Navbar/>
-      <Tabs>
+      <Tabs pt={20}>
         <TabPanels>
           <TabPanel>
       <Box>

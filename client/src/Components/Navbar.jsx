@@ -6,7 +6,7 @@ const Navbar = () => {
 
 
 return (
-    <Flex p={3} bg='#50509b' color='white' justifyContent='space-around'>
+    <Flex p={3} zIndex="9999" bg='#50509b' color='white' w='100%' justifyContent='space-around' position='fixed'>
       <Link to="/">
       <Image cursor='pointer' src="https://www.pancardapplyonline.com/img/pancardao_logo.svg" w='55px' />
       </Link>

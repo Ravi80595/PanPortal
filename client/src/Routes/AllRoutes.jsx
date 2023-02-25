@@ -8,12 +8,13 @@ import CardStatus from '../Pages/Customer/CardStatus'
 import Correction from '../Pages/Customer/Correction'
 import Admindocument from '../Pages/Admin/Admindocument'
 import Correctiondocuments from '../Pages/Admin/Correctiondocuments'
+import PrivateRoute from './PrivateRoute'
 
 const AllRoutes = () => {
 
 return (
     <Routes>
-     <Route path="/" element={<Home/>}></Route>
+     <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
      <Route path="/user/signup" element={<Signup/>}></Route>
      <Route path="/user/auth" element={<Auth/>}></Route>
      <Route path="/applynewcard" element={<Applynewcard/>}></Route>
