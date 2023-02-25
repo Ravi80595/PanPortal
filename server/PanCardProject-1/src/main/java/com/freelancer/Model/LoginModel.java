@@ -1,21 +1,17 @@
 package com.freelancer.Model;
 
-import org.springframework.validation.annotation.Validated;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Validated
+
+
 public class LoginModel {
+	public LoginModel() {
+
+	}
 	@Email
 	@NotNull
 	private String email;
@@ -25,4 +21,20 @@ public class LoginModel {
 	@NotBlank
 	@Size(min = 6, max = 15, message = "please provide the currect password")
 	private String password;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }
