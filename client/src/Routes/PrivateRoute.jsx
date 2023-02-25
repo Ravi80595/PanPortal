@@ -5,10 +5,10 @@ import { Navigate } from 'react-router-dom'
 
 const PrivateRoute = ({children}) => {
     const isAuth = localStorage.getItem('isAuth');
+console.log(typeof(isAuth))
 
-
-if(isAuth=="" || isAuth=="undefined" || isAuth==null){
-    return <Navigate to="/user/signup"/>
+if(isAuth==" " || isAuth=="undefined" || isAuth==='null' || isAuth==null){
+    return <Navigate to="/user/auth"/>
 }
   return children
 }

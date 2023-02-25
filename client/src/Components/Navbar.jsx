@@ -1,9 +1,14 @@
 import { Flex,Text,Box,Image } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+  const navigate=useNavigate()
 
+const handleLogout=()=>{
+  localStorage.setItem('isAuth',JSON.stringify(null))
+  navigate("/user/auth")
+}
 
 return (
     <Flex p={3} zIndex="9999" bg='#50509b' color='white' w='100%' justifyContent='space-around' position='fixed'>
@@ -20,7 +25,7 @@ return (
         <Link to="/cardstatus">
         <Text>My Card</Text>
         </Link>
-        <Text>Logout</Text>
+        <Text cursor='pointer' onClick={handleLogout}>Logout</Text>
       </Flex>
     </Flex>
   )

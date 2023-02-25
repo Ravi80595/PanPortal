@@ -1,14 +1,35 @@
 import { Box, Flex,Heading,Image,Text} from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../Components/Navbar'
+import axios from 'axios'
+import { baseUrl } from '../../Components/BaseUrl'
+
 
 const CardStatus = () => {
+  const [data,setData]=useState([])
+console.log(data)
+
+useEffect(()=>{
+ getCard()
+},[])
+
+
+const getCard=()=>{
+  axios.get(`${baseUrl}/user/getProfile?email=${'kunal@gmail.com'}`)
+  .then((res)=>{
+    console.log(res)
+    setData([res.data])
+  })
+}
 
 
 return (
     <Box>
       <Navbar/>
       <Text pt='145px' textAlign='center' pb={5}>Front Side</Text>
+      {
+        data && data.map(ele=>(
+          <>
       <Box borderRadius={20} backgroundImage={'https://static.wixstatic.com/media/11062b_4b7c9a8e48334d5aad2fd274fddba3bc~mv2.jpg/v1/fill/w_1024,h_784,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/11062b_4b7c9a8e48334d5aad2fd274fddba3bc~mv2.jpg'} w='45%' m='auto'  pb={3}>
         <Flex fontSize="22px" pt={5} justifyContent='space-around'>
           <Box>
@@ -21,7 +42,7 @@ return (
         <Box>
           <Image ml={5} mr={5} w={150} src="https://avatars.githubusercontent.com/u/63177572?v=4"/>
           <Text textAlign='center' pt={2}>नाम/Name</Text>
-          <Text textAlign='center'>Ravi sharma</Text>
+          <Text textAlign='center'>{ele.firstName}  {ele.lastName}</Text>
           <Text pt={3} textAlign='center'>जन्म की तारीख/Date of birth</Text>
           <Text textAlign='center'>20/25/2000</Text>
         </Box>
@@ -31,13 +52,13 @@ return (
           <Text textAlign='center'>AABKSIDDKSL</Text>
           </Box>
           <Box>
-          <Text textAlign='center'>पिता का नाम/Father's Name</Text>
-          <Text textAlign='center'>Jaibhagwan</Text>
+          <Text textAlign='center' fontSize='15px'>पिता का नाम/Father's Name</Text>
+          <Text textAlign='center' fontSize='15px'>Jaibhagwan</Text>
           </Box>
         </Flex>
         <Box>
           <Image w={150} src="https://www.pngall.com/wp-content/uploads/2/QR-Code-Transparent.png"/>
-          <Text pt={10} textAlign='center' fontFamily="cursive">Ravi</Text>
+          <Text pt={10} textAlign='center' fontFamily="cursive">{ele.firstName}</Text>
           <Text>हस्ताक्षर/Signature</Text>
         </Box>
         </Flex>
@@ -60,6 +81,9 @@ return (
           </Box>
         </Flex>
       </Box>
+      </>
+      ))
+    }
     </Box>
   )
 }

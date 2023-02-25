@@ -3,10 +3,72 @@ import { Box,Flex,Input,Text,Button,Tabs,Tab,TabList,TabPanel,TabPanels,Select,I
 import Navbar from '../../Components/Navbar'
 import Dropzone from 'react-dropzone'
 import {CiEdit} from "react-icons/ci"
+import axios from 'axios'
+import { baseUrl } from '../../Components/BaseUrl'
 
 
 const Applynewcard = () => {
+  const initObj={
+    firstName:'',
+    middleName:'',
+    lastName:'',
+    address:'',
+    email:''
+}
 const [image,setImage]=useState('')
+const [values,setValues]=useState(initObj)
+
+
+// ***************************  Change Events *********************************
+
+const handleChange = (e) => {
+  setValues({...values,[e.target.name]:e.target.value})
+}
+
+const handleProfile=()=>{
+  const payload={
+      firstName:values.firstName,
+      lastName:values.lastName,
+      middleName:values.gender,
+      email:values.email,
+      address:values.house+", "+values.street+", "+ values.area+", "+ values.pin+", "+ values.state+", "+ values.nationality
+  }
+  console.log(payload)
+if(payload.firstName==""||payload.lastName==""||payload.email=="" ||payload.address==""){
+  alert("Please fill All Madentory fields")
+}else{
+  axios.post(`http://localhost:8888/user/addProfile`,payload)
+  .then((res)=>{
+    console.log(res)
+  })
+  .catch((err)=>{
+    console.log(err)
+    alert('Something went wrong')
+})
+}
+}
+
+const uploadDocument=()=>{
+  const formData=new FormData()
+  formData.append("files",image);
+  
+axios.post(`${baseUrl}/user/addDocument?userEmail=${values.email}`,formData,{
+  headers:{
+    "Content-Type":"multipart/form-data"
+  }
+})
+.then((res)=>{
+  console.log(res)
+  alert("Documents Uploaded")
+})
+.catch((err)=>{
+  console.log(err)
+  alert('Something went wrong')
+})
+}
+
+
+
 
 return (
     <Box bg='grey'>
@@ -17,17 +79,17 @@ return (
       <Box>
         <Flex justifyContent='space-around' gap={10} w="90%" m='auto'>
           <Box p={5}>
-            <Input id='firstName' borderRadius={0} bg='white' m={3} placeholder="Enter your first name"/>
+            <Input id='firstName' name='firstName' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your first name"/>
             <Input id='fatherName' borderRadius={0} bg='white' m={3} placeholder="Enter your father name"/>
             <Input id='motherName' borderRadius={0} bg='white' m={3} placeholder="Enter your mother name"/>
           </Box>
           <Box p={5}>
-            <Input id='lastName' borderRadius={0} bg='white' m={3} placeholder="Enter your last name"/>
+            <Input id='lastName' name='lastName' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your last name"/>
             <Input id='phoneNumber' borderRadius={0} bg='white' m={3} placeholder="Enter phone number"/>
-            <Input id='emailId' borderRadius={0} bg='white' m={3} placeholder="Enter email id"/>
+            <Input id='emailId' name='email' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter email id"/>
           </Box>
           <Box p={5}>
-            <Input id='male/female' borderRadius={0} bg='white' m={3} placeholder="Enter male or female"/>
+            <Input id='male/female' name='gender' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter male or female"/>
             <Input id='phoneNumber2' borderRadius={0} bg='white' m={3} placeholder="Enter altername number"/>
             <Input id='age' borderRadius={0} bg='white' m={3} placeholder="Enter your age"/>
           </Box>
@@ -37,30 +99,30 @@ return (
             <Text pb={5}>Address Information</Text>
             <Flex  w="70%" m='auto' mb={3}>
               <Text w='30%'>House No : </Text>
-              <Input id='houseNo' bg='white' />
+              <Input id='houseNo' name='house' onChange={handleChange} bg='white' />
             </Flex>
             <Flex w="70%" m='auto' mb={3}>
               <Text w='30%'>Street name : </Text>
-              <Input id='streetName' bg='white' />
+              <Input id='streetName' name='street' onChange={handleChange} bg='white' />
             </Flex>
             <Flex justifyContent='space-evenly'>
               <Flex w='50%'>
               <Text w='30%'>Area name : </Text>
-              <Input id='areaName' w='45%' bg='white' />
+              <Input id='areaName' name='area' onChange={handleChange} w='45%' bg='white' />
               </Flex>
               <Flex w='50%'>
               <Text w='25%'>Pin code : </Text>
-              <Input id='pincode' w='45%' bg='white' />
+              <Input id='pincode' name='pin' onChange={handleChange} w='45%' bg='white' />
               </Flex>
             </Flex>
             <Flex pt={5} justifyContent='space-evenly'>
               <Flex w='50%'>
               <Text w='30%'>State : </Text>
-              <Input id='state' w='45%' bg='white' />
+              <Input id='state' name='state' onChange={handleChange} w='45%' bg='white' />
               </Flex>
               <Flex w='50%'>
               <Text w='30%'>Nationality : </Text>
-              <Input id='nationality' w='45%' bg='white' />
+              <Input id='nationality' name='nationality' onChange={handleChange} w='45%' bg='white' />
               </Flex>
             </Flex>
           </Box>
@@ -130,11 +192,11 @@ return (
             )}
           </Dropzone>
             </Box>
-            <Button fontSize="20px" p={7} mt={10} _hover={{color:'black'}} bg='#3131a5' color='white'>Upload Documents</Button>
+            <Button onClick={uploadDocument} fontSize="20px" p={7} mt={10} _hover={{color:'black'}} bg='#3131a5' color='white'>Upload Documents</Button>
           </Box>
           <Box pl='20%'>
             <Image w={200} src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/29250/clipboard-with-paper-clipart-md.png" />
-            <Button fontSize="20px" p={7} mt={10} _hover={{color:'black'}} bg='#3131a5' color='white'>Submit</Button>
+            <Button onClick={handleProfile} fontSize="20px" p={7} mt={10} _hover={{color:'black'}} bg='#3131a5' color='white'>Submit</Button>
           </Box>
         </Flex>
       </Box>

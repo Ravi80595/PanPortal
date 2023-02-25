@@ -1,8 +1,15 @@
 import React from 'react'
 import { Flex,Text,Box,Image } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate} from 'react-router-dom'
 
 const AdminNavbar = () => {
+  const navigate=useNavigate()
+
+const handleLogout=()=>{
+  localStorage.setItem('isAuth',JSON.stringify(null))
+  navigate("/admin/login")
+}
+
 
 return (
     <Flex p={3} bg='#50509b' color='white' justifyContent='space-around'>
@@ -16,7 +23,7 @@ return (
         <Link to="/correctiondocuments">
         <Text>Correction documents</Text>
         </Link>
-        <Text>Logout</Text>
+        <Text cursor='pointer' onClick={handleLogout}>Logout</Text>
       </Flex>
     </Flex>
   )
