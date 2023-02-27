@@ -14,7 +14,7 @@ const initObj={
     password:'',
     confirmPassword:''
 }
-    const [values,setValues]=useState(initObj)
+  const [values,setValues]=useState(initObj)
 
 
 // ***************************  Change Events *********************************

@@ -34,17 +34,16 @@ const handleSubmit=()=>{
 if(payload.email==""|| payload.password==""){
   alert("Please fill All Madentory fields")
 }else{
-  axios.post(`http://localhost:8888/user/login`,payload)
+  axios.post(`${baseUrl}/user/login`,payload)
   .then((res)=>{
     console.log(res)
     alert("Login Success")
-    localStorage.setItem('isAuth',JSON.stringify('true'))
+    localStorage.setItem('isAuth',JSON.stringify(payload))
     navigate("/")
   })
   .catch((err)=>{
     console.log(err)
     alert('Something went wrong')
-    localStorage.setItem('isAuth',JSON.stringify('true'))
 })
 }
 }

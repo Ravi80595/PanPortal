@@ -12,6 +12,7 @@ import PrivateRoute from './PrivateRoute'
 import AdminLogin from '../Pages/Admin/AdminLogin'
 import AdminSignup from '../Pages/Admin/AdminSignup'
 import AdminPrivateRoute from './AdminPrivateRoute'
+import Documentverification from '../Pages/Admin/Documentverification'
 
 const AllRoutes = () => {
 
@@ -27,6 +28,8 @@ return (
      <Route path="/correctiondocuments" element={<AdminPrivateRoute><Correctiondocuments/></AdminPrivateRoute>}></Route>
      <Route path="/admin/login" element={<AdminLogin/>}></Route>
      <Route path="/admin/signup" element={<AdminSignup/>}></Route>
+     <Route path="/admin/user/:id" element={<Documentverification/>}></Route>
+
     </Routes>
   )
 }

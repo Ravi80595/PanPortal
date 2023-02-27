@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {Box,Flex,Input,Button,Text} from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { baseUrl } from '../../Components/BaseUrl'
 
@@ -14,6 +14,7 @@ const Signup = () => {
     confirmPassword:''
 }
  const [values,setValues]=useState(initObj)
+ const navigate=useNavigate()
 
 
 // ***************************  Change Events *********************************
@@ -43,6 +44,7 @@ if(payload.email==""|| payload.userName==""|| payload.password==""||payload.mobi
   .then((res)=>{
     console.log(res)
     alert("Signup Success")
+    navigate("/user/auth")
   })
   .catch((err)=>{
     console.log(err)
@@ -57,7 +59,6 @@ return (
   <Box textAlign='center' w='40%' m='auto' mt={10}>
     <Button mb={2} w='100%' bg='#720000' color='white'>Register</Button>
     <Box  boxShadow= 'rgba(0, 0, 0, 0.35) 0px 5px 15px' p={10} >
-        {/* <Input id='user' name='user' onChange={handleChange} p={5} m={3} placeholder='Enter admin/user'/> */}
         <Input type='email' id='email' name='email' onChange={handleChange} p={5} m={3} placeholder='Enter email'/>
         <Input id='username' name='username' onChange={handleChange} p={5} m={3} placeholder='Enter username'/>
         <Input id='mobileNumber' name='mobileNumber' onChange={handleChange} p={5} m={3} placeholder='Enter mobile number'/>

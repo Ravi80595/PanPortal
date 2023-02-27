@@ -13,10 +13,18 @@ const Applynewcard = () => {
     middleName:'',
     lastName:'',
     address:'',
-    email:''
+    pAddress:'',
+    email:'',
+    fatherName:'',
+    MotherName:'',
+    mobile:'',
+    age:'',
+    panNo:''
 }
 const [image,setImage]=useState('')
 const [values,setValues]=useState(initObj)
+const cardKey=JSON.parse(localStorage.getItem('isAuth'))
+
 
 
 // ***************************  Change Events *********************************
@@ -25,21 +33,38 @@ const handleChange = (e) => {
   setValues({...values,[e.target.name]:e.target.value})
 }
 
+// ***************************  Pan No. Generator *********************************
+
+let result = '';
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+for (let i = 0; i < 7; i++) {
+  const randomIndex = Math.floor(Math.random() * characters.length);
+  result += characters.charAt(randomIndex);
+}
+
+// ***************************  Card details post function *********************************
+
 const handleProfile=()=>{
   const payload={
       firstName:values.firstName,
       lastName:values.lastName,
       middleName:values.gender,
       email:values.email,
-      address:values.house+", "+values.street+", "+ values.area+", "+ values.pin+", "+ values.state+", "+ values.nationality
+      address:values.house+", "+values.street+", "+ values.area+", "+ values.pin+", "+ values.state+", "+ values.nationality,
+      pAddress:values.pHhouse+", "+values.pStreet+", "+ values.pArea+", "+ values.pPin+", "+ values.pState+", "+ values.pNationality,
+      fatherName:values.fatherName,
+      MotherName:values.MotherName,
+      mobile:values.mobile,
+      age:values.age, 
+      panNo:result,
   }
-  console.log(payload)
 if(payload.firstName==""||payload.lastName==""||payload.email=="" ||payload.address==""){
   alert("Please fill All Madentory fields")
 }else{
   axios.post(`http://localhost:8888/user/addProfile`,payload)
   .then((res)=>{
     console.log(res)
+    alert('Details added')
   })
   .catch((err)=>{
     console.log(err)
@@ -48,11 +73,13 @@ if(payload.firstName==""||payload.lastName==""||payload.email=="" ||payload.addr
 }
 }
 
+// ***************************  upload documents function *********************************
+
 const uploadDocument=()=>{
   const formData=new FormData()
   formData.append("files",image);
   
-axios.post(`${baseUrl}/user/addDocument?userEmail=${values.email}`,formData,{
+axios.post(`${baseUrl}/user/addDocument?userEmail=${cardKey.email}`,formData,{
   headers:{
     "Content-Type":"multipart/form-data"
   }
@@ -77,25 +104,25 @@ return (
         <TabPanels>
           <TabPanel>
       <Box>
-        <Flex justifyContent='space-around' gap={10} w="90%" m='auto'>
+        <Flex justifyContent='space-around' gap={[0,0,0,10]} w={["100%","100%","100%","90%"]} m='auto'>
           <Box p={5}>
             <Input id='firstName' name='firstName' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your first name"/>
-            <Input id='fatherName' borderRadius={0} bg='white' m={3} placeholder="Enter your father name"/>
-            <Input id='motherName' borderRadius={0} bg='white' m={3} placeholder="Enter your mother name"/>
+            <Input id='fatherName' name='fatherName' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your father name"/>
+            <Input id='motherName' name='MotherName' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your mother name"/>
           </Box>
           <Box p={5}>
             <Input id='lastName' name='lastName' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your last name"/>
-            <Input id='phoneNumber' borderRadius={0} bg='white' m={3} placeholder="Enter phone number"/>
+            <Input id='phoneNumber' name='mobile' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter phone number"/>
             <Input id='emailId' name='email' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter email id"/>
           </Box>
           <Box p={5}>
             <Input id='male/female' name='gender' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter male or female"/>
             <Input id='phoneNumber2' borderRadius={0} bg='white' m={3} placeholder="Enter altername number"/>
-            <Input id='age' borderRadius={0} bg='white' m={3} placeholder="Enter your age"/>
+            <Input id='age' name='age' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your age"/>
           </Box>
         </Flex>
-        <Flex gap={5} w="97%" m='auto'>
-          <Box w="50%" bg='#e4e4e4' p={5}>
+        <Flex direction={['column','column','column','row']} gap={5} w="97%" m='auto'>
+          <Box w={['95%','95%','95%','45%']} bg='#e4e4e4' p={5}>
             <Text pb={5}>Address Information</Text>
             <Flex  w="70%" m='auto' mb={3}>
               <Text w='30%'>House No : </Text>
@@ -126,34 +153,34 @@ return (
               </Flex>
             </Flex>
           </Box>
-          <Box w="50%" bg='#e4e4e4' p={5}>
+          <Box w={['95%','95%','95%','45%']} bg='#e4e4e4' p={5}>
             <Text pb={5}>Permanent Address Information</Text>
             <Flex  w="70%" m='auto' mb={3}>
               <Text w='30%'>House No : </Text>
-              <Input id='peHouseNo' bg='white' />
+              <Input id='peHouseNo' name='pHouse' onChange={handleChange} bg='white' />
             </Flex>
             <Flex w="70%" m='auto' mb={3}>
               <Text w='30%'>Street name : </Text>
-              <Input id='peStreetName' bg='white' />
+              <Input id='peStreetName' name='pStreet' onChange={handleChange} bg='white' />
             </Flex>
             <Flex justifyContent='space-evenly'>
               <Flex w='50%'>
               <Text w='30%'>Area name : </Text>
-              <Input id='peAreaName' w='45%' bg='white' />
+              <Input id='peAreaName' name='pArea' onChange={handleChange} w='45%' bg='white' />
               </Flex>
               <Flex w='50%'>
               <Text w='25%'>Pin code : </Text>
-              <Input id='pePincode' w='45%' bg='white' />
+              <Input id='pePincode' name='pPin' onChange={handleChange} w='45%' bg='white' />
               </Flex>
             </Flex>
             <Flex pt={5} justifyContent='space-evenly'>
               <Flex w='50%'>
               <Text w='30%'>State : </Text>
-              <Input id='peState' w='45%' bg='white' />
+              <Input id='peState' name='pState' onChange={handleChange} w='45%' bg='white' />
               </Flex>
               <Flex w='50%'>
               <Text w='30%'>Nationality : </Text>
-              <Input id='peNationality' w='45%' bg='white' />
+              <Input id='peNationality' name='pNationality' onChange={handleChange} w='45%' bg='white' />
               </Flex>
             </Flex>
           </Box>
@@ -162,7 +189,7 @@ return (
       </TabPanel>
       <TabPanel>
       <Box>
-        <Flex w='85%' m='auto'>
+        <Flex direction={['column','column','column','row']} w='85%' m='auto'>
           <Box p={10} fontSize="27px">
             <Box mt={5}>
             <Text>Upload documents (Madatory Id Proof)</Text>

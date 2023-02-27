@@ -3,10 +3,13 @@ import React from 'react'
 import AdminNavbar from '../../Components/AdminNavbar'
 
 const Correctiondocuments = () => {
-  return (
+
+  
+
+return (
     <Box>
       <AdminNavbar/>
-      <Flex boxShadow= 'rgba(0, 0, 0, 0.35) 0px 5px 15px' justifyContent='space-around' w='85%' p={5} m='auto' mt={10}>
+      <Flex direction={['column','column','column','row']} boxShadow= 'rgba(0, 0, 0, 0.35) 0px 5px 15px' justifyContent='space-around' w='85%' p={5} m='auto' mt={10}>
         <Box lineHeight={10}>
           <Text>Applicant Name : Ravi Sharma</Text>
           <Text>Applicant Address : VPO Kapro Hisar, Haryana India</Text>

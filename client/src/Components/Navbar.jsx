@@ -13,9 +13,9 @@ const handleLogout=()=>{
 return (
     <Flex p={3} zIndex="9999" bg='#50509b' color='white' w='100%' justifyContent='space-around' position='fixed'>
       <Link to="/">
-      <Image cursor='pointer' src="https://www.pancardapplyonline.com/img/pancardao_logo.svg" w='55px' />
+      <Image cursor='pointer' src="https://www.pancardapplyonline.com/img/pancardao_logo.svg" w='55px' display={["none","none","none","block"]}/>
       </Link>
-      <Flex pt={3}  fontSize="20px" w="80%" justifyContent='space-around'>
+      <Flex pt={3}  fontSize={["10px","10px","10px","20px"]} w={["100%","100%","100%","80%"]} justifyContent='space-around'>
         <Link to="/applynewcard">
         <Text>New Card Form</Text>
         </Link>

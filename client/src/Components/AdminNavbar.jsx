@@ -6,7 +6,7 @@ const AdminNavbar = () => {
   const navigate=useNavigate()
 
 const handleLogout=()=>{
-  localStorage.setItem('isAuth',JSON.stringify(null))
+  localStorage.setItem('isAdminAuth',JSON.stringify(null))
   navigate("/admin/login")
 }
 
@@ -14,9 +14,9 @@ const handleLogout=()=>{
 return (
     <Flex p={3} bg='#50509b' color='white' justifyContent='space-around'>
       <Link to="/applieddocuments">
-      <Image cursor='pointer' src="https://www.pancardapplyonline.com/img/pancardao_logo.svg" w='55px'/>
+      <Image display={["none","none","none","block"]} cursor='pointer' src="https://www.pancardapplyonline.com/img/pancardao_logo.svg" w='55px'/>
       </Link>
-      <Flex pt={3}  fontSize="20px" w="80%" justifyContent='space-around'>
+      <Flex pt={3} fontSize={["10px","10px","10px","20px"]} w={["100%","100%","100%","80%"]} justifyContent='space-around'>
         <Link to="/applieddocuments">
         <Text>Applied documents</Text>
         </Link>
