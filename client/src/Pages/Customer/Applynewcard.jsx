@@ -19,7 +19,8 @@ const Applynewcard = () => {
     MotherName:'',
     mobile:'',
     age:'',
-    panNo:''
+    panNo:'',
+    linkOfImage:''
 }
 const [image,setImage]=useState('')
 const [values,setValues]=useState(initObj)
@@ -57,7 +58,9 @@ const handleProfile=()=>{
       mobile:values.mobile,
       age:values.age, 
       panNo:result,
+      linkOfImage:values.linkOfImage
   }
+  console.log(payload)
 if(payload.firstName==""||payload.lastName==""||payload.email=="" ||payload.address==""){
   alert("Please fill All Madentory fields")
 }else{
@@ -121,6 +124,9 @@ return (
             <Input id='age' name='age' onChange={handleChange} borderRadius={0} bg='white' m={3} placeholder="Enter your age"/>
           </Box>
         </Flex>
+          <Box w='70%' m='auto' mb={5}>
+            <Input name='linkOfImage' onChange={handleChange} bg='white' borderRadius={0} placeholder="Enter your image url here"/>
+          </Box>
         <Flex direction={['column','column','column','row']} gap={5} w="97%" m='auto'>
           <Box w={['95%','95%','95%','45%']} bg='#e4e4e4' p={5}>
             <Text pb={5}>Address Information</Text>
@@ -183,6 +189,7 @@ return (
               <Input id='peNationality' name='pNationality' onChange={handleChange} w='45%' bg='white' />
               </Flex>
             </Flex>
+            
           </Box>
         </Flex>
       </Box>

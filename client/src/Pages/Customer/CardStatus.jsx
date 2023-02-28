@@ -45,7 +45,7 @@ return (
         </Flex>
         <Flex justifyContent='space-around'>
         <Box>
-          <Image ml={5} mr={5} w={150} src="https://media.istockphoto.com/id/587805078/vector/profile-picture-vector-illustration.jpg?s=612x612&w=0&k=20&c=sUCdx-Likqe7eBEcbn1FT8ybOQQHXDgBKLsJc99MtCA="/>
+          <Image ml={5} mr={5} w={150} src={ele.linkOfImage} />
           <Text textAlign='center' pt={2}>नाम/Name</Text>
           <Text textAlign='center'>{ele.firstName}  {ele.lastName}</Text>
           <Text pt={3} textAlign='center'>आयु/age</Text>

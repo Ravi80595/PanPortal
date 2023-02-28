@@ -31,6 +31,16 @@ const approved=(email)=>{
   })
 }
 
+const rejected=(email)=>{
+  console.log(email)
+  axios.delete(`http://localhost:8888/admin/deleteCorrection/${email}`)
+  .then((res)=>{
+    console.log(res)
+    alert("Rejected")
+    getCorrection()
+  })
+}
+
 
 return (
   <Box >
@@ -59,7 +69,7 @@ return (
    </Flex>
   <Flex w='50%' m='auto' justifyContent='space-evenly' mb={5}>
     <Button onClick={()=>approved(ele.email)} bg='green' color='white' p={5} _hover={{color:'black'}}>Approve</Button>
-    <Button bg='red' color='white' p={5} _hover={{color:'black'}}>Reject</Button>
+    <Button onClick={()=>rejected(ele.email)} bg='red' color='white' p={5} _hover={{color:'black'}}>Reject</Button>
   </Flex>
  
   </>
