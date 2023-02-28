@@ -49,14 +49,14 @@ const handleSubmit=()=>{
     email:cardKey.email,
     address:values.address,
     fatherName:values.fatherName,
-    MotherName:values.MotherName,
+    motherName:values.MotherName,
     mobile:values.mobile,
     age:values.age,
 }
 if(payload.firstName==""||payload.lastName==""||payload.email=="" ||payload.address==""){
   alert("Please fill All Madentory fields")
 }else{
-  axios.post(`http://localhost:8888/user/editProfile/${profileId}`,payload)
+  axios.put(`http://localhost:8888/user/editProfile/${cardKey.email}`,payload)
   .then((res)=>{
     console.log(res)
     alert('Pan Updated')
